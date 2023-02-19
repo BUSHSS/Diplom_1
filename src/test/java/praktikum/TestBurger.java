@@ -1,5 +1,4 @@
 package praktikum;
-import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +14,7 @@ public class TestBurger {
     Burger burger = new Burger();
     Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100F);
     @Test
-    @DisplayName("Проверка покрытия getPrice")
+    //"Проверка покрытия getPrice"
     public void getPrice(){
         burger.addIngredient(ingredient);
         burger.setBuns(bun);
@@ -24,7 +23,7 @@ public class TestBurger {
     }
 
     @Test
-    @DisplayName("Проверка покрытия getReceipt")
+    //"Проверка покрытия getReceipt"
     public void getReceipt() {
         burger.addIngredient(ingredient);
         burger.setBuns(bun);
@@ -33,14 +32,14 @@ public class TestBurger {
     }
 
     @Test
-    @DisplayName("Проверка покрытия addIngredient")
+    //"Проверка покрытия addIngredient"
     public void addIngredient() {
         burger.addIngredient(ingredient);
         Assert.assertEquals(false, burger.ingredients.isEmpty());
     }
 
     @Test
-    @DisplayName("Проверка покрытия removeIngredient")
+    //"Проверка покрытия removeIngredient"
     public void removeIngredient() {
         burger.addIngredient(ingredient);
         burger.addIngredient(ingredient);
@@ -51,7 +50,7 @@ public class TestBurger {
     }
 
     @Test
-    @DisplayName("Проверка покрытия moveIngredient")
+    //"Проверка покрытия moveIngredient"
     public void moveIngredient() {
         burger.addIngredient(new Ingredient(IngredientType.SAUCE, "hot sauce", 100F));
         burger.addIngredient(new Ingredient(IngredientType.FILLING, "cutlet", 100F));

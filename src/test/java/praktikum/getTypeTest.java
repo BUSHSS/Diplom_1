@@ -1,5 +1,4 @@
 package praktikum;
-import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,7 @@ public class getTypeTest {
         };
     }
     @Test
-    @DisplayName("Проверка покрытия getType")
+    //"Проверка покрытия getType"
     public void getTypeTest() {
         Ingredient ingredient = new Ingredient(type, "начинка", 500F);
         Assert.assertEquals(type, ingredient.getType());
