@@ -1,4 +1,5 @@
 package praktikum;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,30 +13,39 @@ public class TestBurger {
     @Mock
     Bun bun;
     Burger burger = new Burger();
-    Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100F);
+    @Mock
+    Ingredient ingredient;
+    @Mock
+    Ingredient ingredient2;
+
     @Test
     //"Проверка покрытия getPrice"
-    public void getPrice(){
+    public void getPrice() {
+        Mockito.when(ingredient.getPrice()).thenReturn(100F);
         burger.addIngredient(ingredient);
         burger.setBuns(bun);
         Mockito.when(bun.getPrice()).thenReturn(300F);
-        Assert.assertEquals(700F,burger.getPrice(),0.0F);
+        Assert.assertEquals(700F, burger.getPrice(), 0.0F);
     }
 
     @Test
     //"Проверка покрытия getReceipt"
     public void getReceipt() {
         burger.addIngredient(ingredient);
+        Mockito.when(ingredient.getName()).thenReturn("Булочка с корицей");
+        Mockito.when(ingredient.getType()).thenReturn(IngredientType.FILLING);
         burger.setBuns(bun);
         burger.getReceipt();
         Mockito.verify(bun, Mockito.times(2)).getName();
+        Mockito.verify(ingredient, Mockito.times(1)).getName();
+        Mockito.verify(ingredient, Mockito.times(1)).getType();
     }
 
     @Test
     //"Проверка покрытия addIngredient"
     public void addIngredient() {
         burger.addIngredient(ingredient);
-        Assert.assertEquals(false, burger.ingredients.isEmpty());
+        Assert.assertFalse(burger.ingredients.isEmpty());
     }
 
     @Test
@@ -44,7 +54,7 @@ public class TestBurger {
         burger.addIngredient(ingredient);
         burger.addIngredient(ingredient);
         burger.addIngredient(ingredient);
-        int expected = burger.ingredients.size()-1;
+        int expected = burger.ingredients.size() - 1;
         burger.removeIngredient(1);
         Assert.assertEquals(expected, burger.ingredients.size());
     }
@@ -52,13 +62,12 @@ public class TestBurger {
     @Test
     //"Проверка покрытия moveIngredient"
     public void moveIngredient() {
-        burger.addIngredient(new Ingredient(IngredientType.SAUCE, "hot sauce", 100F));
-        burger.addIngredient(new Ingredient(IngredientType.FILLING, "cutlet", 100F));
-        burger.addIngredient(new Ingredient(IngredientType.FILLING, "sausage", 300F));
-        Ingredient expectedIngredient = burger.ingredients.get(2);
+        Mockito.when(ingredient.getName()).thenReturn("Булочка с корицей");
+        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredient2);
         int expectedSize = burger.ingredients.size();
-        burger.moveIngredient(2,0);
-        Assert.assertEquals(expectedIngredient,burger.ingredients.get(0)); //проверка, что нужный ингридиент переместился в заданный индекс
+        burger.moveIngredient(0, 1);
+        Assert.assertEquals(burger.ingredients.get(1).getName(), ingredient.getName()); //проверка, что нужный ингридиент переместился в заданный индекс
         Assert.assertEquals(expectedSize, burger.ingredients.size()); // проверка, что размер массива при этом не изменился
     }
 }

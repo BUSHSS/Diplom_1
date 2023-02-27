@@ -2,6 +2,7 @@ package praktikum;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+
 public class TestIngredientType {
 
     @Test
@@ -9,6 +10,7 @@ public class TestIngredientType {
     public void TestIngredientFilling() {
         MatcherAssert.assertThat(String.valueOf(IngredientType.FILLING), true);
     }
+
     @Test
     //"Проверка наличия SAUCE в справочнике ингридентов"
     public void TestIngredientSauce() {
